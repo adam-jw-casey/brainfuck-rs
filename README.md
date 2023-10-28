@@ -1,2 +1,8 @@
 # brainfuck-rs
-Brainfuck interpretter, written in Rust
+[Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) interpreter, written in Rust
+
+## Usage
+
+```
+cargo run YOUR_PROGRAM.bf
+```
