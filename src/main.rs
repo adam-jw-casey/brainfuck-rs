@@ -14,8 +14,8 @@ fn main() {
     let bytes = contents.as_bytes();
 
     let mut data = HashMap::<i32, u8>::new();
-    let mut instruction_pointer = 0;
-    let mut data_pointer = 0;
+    let mut instruction_pointer: usize = 0;
+    let mut data_pointer: i32 = 0;
 
     while instruction_pointer < bytes.len(){
         match bytes[instruction_pointer]{
@@ -64,8 +64,8 @@ fn main() {
                 match other{
                     b'<' => data_pointer -= 1,
                     b'>' => data_pointer += 1,
-                    b'+' => *data.entry(data_pointer).or_default() += 1,
-                    b'-' => *data.entry(data_pointer).or_default() -= 1,
+                    b'+' => (*data.entry(data_pointer).or_default(), _) = data.entry(data_pointer).or_default().overflowing_add(1),
+                    b'-' => (*data.entry(data_pointer).or_default(), _) = data.entry(data_pointer).or_default().overflowing_sub(1),
                     b'.' => print!("{}", *data.entry(data_pointer).or_default() as char),
                     b',' => {std::io::stdin().read_exact(std::slice::from_mut(data.entry(data_pointer).or_default())).expect("This should work");},
                     _ => (),
