@@ -67,7 +67,7 @@ fn main() {
                     b'+' => (*data.entry(data_pointer).or_default(), _) = data.entry(data_pointer).or_default().overflowing_add(1),
                     b'-' => (*data.entry(data_pointer).or_default(), _) = data.entry(data_pointer).or_default().overflowing_sub(1),
                     b'.' => print!("{}", *data.entry(data_pointer).or_default() as char),
-                    b',' => {std::io::stdin().read_exact(std::slice::from_mut(data.entry(data_pointer).or_default())).expect("This should work");},
+                    b',' => {std::io::stdin().read_exact(std::slice::from_mut(data.entry(data_pointer).or_default())).expect("Should be able to read input");},
                     _ => (),
                 };
                 instruction_pointer += 1;
